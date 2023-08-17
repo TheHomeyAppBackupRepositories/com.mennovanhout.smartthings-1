@@ -32,6 +32,10 @@ class Device extends homey_1.default.Device {
                 });
             }
         }).catch((error) => {
+            if (error.response?.status === 403) {
+                this.setUnavailable('Device unavailable');
+                return;
+            }
             this.log(error, 'something went wrong while updating information');
         });
     }
